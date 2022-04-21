@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+
+  db:
+    image: postgres:11.11
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: zipi
+      POSTGRES_PASSWORD: zipi
+      POSTGRES_DB: zipi
+      POSTGRES_PORT: 5432
+    networks:
+      - zipi
+
+networks:
+  zipi: null
