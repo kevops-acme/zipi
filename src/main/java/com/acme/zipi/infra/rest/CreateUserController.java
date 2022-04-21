@@ -1,8 +1,8 @@
 package com.acme.zipi.infra.rest;
 
-import com.acme.zipi.application.CreateUserRequest;
-import com.acme.zipi.application.CreateUserResponse;
-import com.acme.zipi.application.CreateUserUseCase;
+import com.acme.zipi.application.users.create.CreateUserRequest;
+import com.acme.zipi.application.users.create.CreateUserResponse;
+import com.acme.zipi.application.users.create.CreateUserUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.acme.zipi.application;
+package com.acme.zipi.application.users.create;
 
 import lombok.Builder;
 import lombok.Data;

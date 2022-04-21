@@ -1,5 +1,7 @@
-package com.acme.zipi.application;
+package com.acme.zipi.application.users.create;
 
+import com.acme.zipi.application.users.create.CreateUserRequest;
+import com.acme.zipi.application.users.create.CreateUserResponse;
 import com.acme.zipi.domain.model.User;
 import com.acme.zipi.domain.repositories.UsersRepository;
 import lombok.RequiredArgsConstructor;
