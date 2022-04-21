@@ -10,6 +10,8 @@ services:
       POSTGRES_PASSWORD: zipi
       POSTGRES_DB: zipi
       POSTGRES_PORT: 5432
+    ports:
+      - 5444:5432
     networks:
       - zipi
 
