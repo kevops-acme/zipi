@@ -2,7 +2,7 @@
 
 set -e
 
-# @description Build zipi jar package
+# @description Compile zipi app
 #
 # @example
 #   build
@@ -14,11 +14,11 @@ set -e
 #
 # @stdout "Not implemented" message if the requested task is not implemented
 #
-function build-jar() {
+function compile() {
 
     # Init
-    local briefMessage="Build zipi app jar package"
-    local helpMessage="Build the zipi app jar package"
+    local briefMessage="Compile zipi app"
+    local helpMessage="Compile zipi app, only to check if the applicacion can be compiled"
 
     # Task choosing
     case $1 in
@@ -29,7 +29,7 @@ function build-jar() {
             showHelpMessage ${FUNCNAME[0]} "$helpMessage"
             ;;
         exec)
-            mvn clean package -DskipTests
+            mvn clean compile -DskipTests
             ;;
         *)
             showNotImplemtedMessage $1 ${FUNCNAME[0]}
@@ -38,4 +38,4 @@ function build-jar() {
 }
 
 # Main
-build-jar "$@"
+compile "$@"
