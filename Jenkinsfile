@@ -22,16 +22,11 @@ pipeline {
 //                jplSonarScanner(cfg)
 //            }
 //        }
-        stage ("Build jar") {
+        stage ("Compile") {
             agent { label 'docker' }
             when { branch 'demo' }
             steps {
-                sh "devcontrol build-jar"
-            }
-            post {
-                always {
-                    sh "bin/devcontrol.sh destroy"
-                }
+                sh "devcontrol compile"
             }
         }
         stage ("Test") {
@@ -39,6 +34,18 @@ pipeline {
             when { branch 'demo' }
             steps {
                 sh "devcontrol test"
+            }
+            post {
+                always {
+                    sh "bin/devcontrol.sh destroy"
+                }
+            }
+        }
+        stage ("Build jar") {
+            agent { label 'docker' }
+            when { branch 'demo' }
+            steps {
+                sh "devcontrol build-jar"
             }
         }
         stage ("Build docker image") {
