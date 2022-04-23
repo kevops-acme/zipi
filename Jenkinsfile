@@ -48,7 +48,12 @@ pipeline {
         }
         stage ("Build docker image") {
             agent { label 'docker' }
-            when { branch 'PR-*' }
+            when {
+                anyof {
+                    branch 'PR-*';
+                    branch 'main'
+                }
+            }
             steps {
                 sh "bin/devcontrol.sh build-docker"
             }
