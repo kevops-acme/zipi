@@ -32,7 +32,7 @@ function test() {
             DCT="docker-compose -f docker-compose.test.yaml"
             $DCT down -v
             $DCT up -d
-            until $DCT exec db pg_isready; do sleep 1; done
+            until $DCT exec -T db pg_isready; do sleep 1; done
             export SPRING_DATASOURCE_URL="jdbc:postgresql://localhost:5432/zipi"
             mvn clean test
             $DCT down -v
