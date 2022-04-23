@@ -49,7 +49,7 @@ pipeline {
         stage ("Build docker image") {
             agent { label 'docker' }
             when {
-                anyof {
+                anyOf {
                     branch 'PR-*';
                     branch 'main'
                 }
