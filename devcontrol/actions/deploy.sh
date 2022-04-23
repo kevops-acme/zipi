@@ -30,7 +30,7 @@ function deploy() {
         exec)
             TAG=$(getVersion)
             target=${2:-ubuntu@zipi.app.kevops.academy}
-            ssh_opts="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i kevops-academy.pem"
+            ssh_opts="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
             rsync -avpP -e "ssh $ssh_opts" docker-compose.prod.yaml "$target:~/app/docker-compose.yaml"
             rsync -avpP -e "ssh $ssh_opts" .env.dist "$target:~/app/.env"
             docker save kevopsacademy/zipi-app:$TAG | ssh -T $ssh_opts "$target" "docker load"
