@@ -4,6 +4,7 @@
 
 // Initialize global config
 cfg = jplConfig('zipi', 'backend' ,'', [email: 'pedro.rodriguez+kevops@kairosds.com'])
+cfg.commitValidation.enabled = false
 
 pipeline {
     agent none
