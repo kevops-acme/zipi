@@ -26,7 +26,7 @@ pipeline {
             agent { label 'docker' }
             when { branch 'demo' }
             steps {
-                sh "devcontrol compile"
+                sh "bin/devcontrol.sh compile"
             }
         }
         stage ("Test") {
@@ -45,16 +45,26 @@ pipeline {
             agent { label 'docker' }
             when { branch 'demo' }
             steps {
-                sh "devcontrol build-jar"
+                sh "bin/devcontrol.sh build-jar"
             }
         }
         stage ("Build docker image") {
             agent { label 'docker' }
             when { branch 'demo' }
             steps {
-                sh "devcontrol build-docker"
+                sh "bin/devcontrol.sh build-docker"
             }
         }
+        stage ("Deploy") {
+            agent { label 'docker' }
+            when { branch 'demo' }
+            steps {
+                sshagent (credentials: ['jpl-ssh-credentials']) {
+                    sh "ssh ubuntu@zipi.app.kevops.academy hostname"
+                }
+            }
+        }
+
     }
 
     post {
