@@ -1,3 +1,22 @@
+# [1.1.0](https://github.com/kevops-acme/zipi/compare/v1.0.0...v1.1.0) (2022-04-23)
+
+
+### build
+
+* build docker image stage on pull requests and main branch ([e0178ae](https://github.com/kevops-acme/zipi/commit/e0178aeb0f78b30fc3f9899143e604c0313ae050))
+* disable commit validation ([139c3dc](https://github.com/kevops-acme/zipi/commit/139c3dc0cdd1ed2f4c575eb21d0a9bb25f64082e))
+* fix typo in anyOf usage ([31d1a82](https://github.com/kevops-acme/zipi/commit/31d1a8244b9d9934e4b7481516ef0463d33de60d))
+
+### docs
+
+* add changelog ([3a2519b](https://github.com/kevops-acme/zipi/commit/3a2519b9661b8095bc57067d3a5397f856dc05ba))
+
+### feat
+
+* use dynamic db port for docker-compose test ([62e80aa](https://github.com/kevops-acme/zipi/commit/62e80aacfc9b7c15f63e6628de0967671993ba9d))
+
+
+
 # [1.0.0](https://github.com/kevops-acme/zipi/compare/df5bab9ec3339700611bee8d96c83d3e56f85c88...v1.0.0) (2022-04-23)
 
 
