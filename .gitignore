@@ -2,3 +2,5 @@ target/
 .env
 .vscode
 .idea/
+postgresql/
+postgresql_data/
