@@ -21,12 +21,12 @@ function test() {
     local helpMessage="Test zipi app"
 
     # Task choosing
-    case $1 in
+    case "$1" in
         brief)
-            showBriefMessage ${FUNCNAME[0]} "$briefMessage"
+            showBriefMessage "${FUNCNAME[0]}" "$briefMessage"
             ;;
         help)
-            showHelpMessage ${FUNCNAME[0]} "$helpMessage"
+            showHelpMessage "${FUNCNAME[0]}" "$helpMessage"
             ;;
         exec)
             DCT="docker-compose -f docker-compose.test.yaml"
@@ -38,7 +38,7 @@ function test() {
             $DCT down -v
             ;;
         *)
-            showNotImplemtedMessage $1 ${FUNCNAME[0]}
+            showNotImplemtedMessage "$1" "${FUNCNAME[0]}"
             return 1
     esac
 }

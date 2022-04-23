@@ -21,21 +21,21 @@ function build-docker() {
     local helpMessage="Build the zipi docker image"
 
     # Task choosing
-    case $1 in
+    case "$1" in
         brief)
-            showBriefMessage ${FUNCNAME[0]} "$briefMessage"
+            showBriefMessage "${FUNCNAME[0]}" "$briefMessage"
             ;;
         help)
-            showHelpMessage ${FUNCNAME[0]} "$helpMessage"
+            showHelpMessage "${FUNCNAME[0]}" "$helpMessage"
             ;;
         exec)
             TAG=$(getVersion)
-            docker build -t kevopsacademy/zipi-app:$TAG .
+            docker build -t kevopsacademy/zipi-app:"$TAG" .
             sed "s/^TAG=.*/TAG=$TAG/g" .env.dist -i
             cp .env.dist .env
             ;;
         *)
-            showNotImplemtedMessage $1 ${FUNCNAME[0]}
+            showNotImplemtedMessage "$1" "${FUNCNAME[0]}"
             return 1
     esac
 }

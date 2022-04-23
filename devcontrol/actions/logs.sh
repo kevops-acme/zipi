@@ -18,18 +18,18 @@ function logs() {
     local helpMessage="Show logs of the containers of the platform using 'docker-compose logs'"
 
     # Task choosing
-    case $1 in
+    case "$1" in
         brief)
-            showBriefMessage ${FUNCNAME[0]} "$briefMessage"
+            showBriefMessage "${FUNCNAME[0]}" "$briefMessage"
             ;;
         help)
-            showHelpMessage ${FUNCNAME[0]} "$helpMessage"
+            showHelpMessage "${FUNCNAME[0]}" "$helpMessage"
             ;;
         exec)
             docker-compose -f docker-compose.prod.yaml logs --tail=100 -f
             ;;
         *)
-            showNotImplemtedMessage ${FUNCNAME[0]} $1
+            showNotImplemtedMessage "${FUNCNAME[0]}" "$1"
             return 1
     esac
 }
