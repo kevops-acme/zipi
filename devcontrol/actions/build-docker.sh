@@ -32,6 +32,7 @@ function build-docker() {
             TAG=$(getVersion)
             docker build -t kevopsacademy/zipi-app:$TAG .
             sed "s/^TAG=.*/TAG=$TAG/g" .env.dist -i
+            cp .env.dist .env
             ;;
         *)
             showNotImplemtedMessage $1 ${FUNCNAME[0]}

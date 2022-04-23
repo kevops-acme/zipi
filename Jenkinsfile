@@ -22,7 +22,7 @@ pipeline {
 //                jplSonarScanner(cfg)
 //            }
 //        }
-        stage ("Build") {
+        stage ("Build jar") {
             agent { label 'docker' }
             when { branch 'demo' }
             steps {
@@ -34,18 +34,18 @@ pipeline {
                 }
             }
         }
-        stage ("Build jar") {
-            agent { label 'docker' }
-            when { branch 'demo' }
-            steps {
-                sh "devcontrol build-docker"
-            }
-        }
         stage ("Test") {
             agent { label 'docker' }
             when { branch 'demo' }
             steps {
                 sh "devcontrol test"
+            }
+        }
+        stage ("Build docker image") {
+            agent { label 'docker' }
+            when { branch 'demo' }
+            steps {
+                sh "devcontrol build-docker"
             }
         }
     }

@@ -29,7 +29,8 @@ function build-jar() {
             showHelpMessage ${FUNCNAME[0]} "$helpMessage"
             ;;
         exec)
-        	mvn clean package -DskipTests
+            cp .env.dist .env
+            mvn clean package -DskipTests
             ;;
         *)
             showNotImplemtedMessage $1 ${FUNCNAME[0]}
