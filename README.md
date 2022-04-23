@@ -43,18 +43,22 @@ Para desarrollar / probar en local:
 $ cp .env.dist .env
 ```
 
-- Levantamos la base de datos Postgres de test con docker-compose
+- Levantamos la base de datos Postgres de test con docker-compose, y anotamos el puerto expuesto, en este caso el 49180
 
 ```shell
 pedro.rodriguez@pedro-kairos:~/workspace/kevops-acme/zipi$ docker-compose -f docker-compose.test.yaml up -d
 Creating network "zipi_default" with the default driver
 Creating zipi_db_1 ... done
+$ docker-compose -f docker-compose.test.yaml ps
+  Name                 Command                      State                             Ports                   
+--------------------------------------------------------------------------------------------------------------
+zipi_db_1   docker-entrypoint.sh postgres   Up (health: starting)   0.0.0.0:49180->5432/tcp,:::49180->5432/tcp
 ```
 
-- Arrancamos la aplicaciíon Springboot
+- Arrancamos la aplicaciíon Springboot con el puerto 49180
 
 ```shell
-$ SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/zipi mvn spring-boot:run
+$ SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:49180/zipi mvn spring-boot:run
 WARNING: An illegal reflective access operation has occurred
 WARNING: Illegal reflective access by com.google.inject.internal.cglib.core.$ReflectUtils$1 (file:/usr/share/maven/lib/guice.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)
 WARNING: Please consider reporting this to the maintainers of com.google.inject.internal.cglib.core.$ReflectUtils$1
