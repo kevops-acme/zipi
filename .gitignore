@@ -4,3 +4,4 @@ target/
 .idea/
 postgresql/
 postgresql_data/
+*.pem
