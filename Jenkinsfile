@@ -60,7 +60,7 @@ pipeline {
             when { branch 'demo' }
             steps {
                 sshagent (credentials: ['jpl-ssh-credentials']) {
-                    sh "ssh ubuntu@zipi.app.kevops.academy hostname"
+                    sh "bin/devcontrol.sh deploy ubuntu@zipi.app.kevops.academy"
                 }
             }
         }
