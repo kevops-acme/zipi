@@ -34,7 +34,7 @@ function test() {
             $DCT up -d
             until $DCT exec -T db pg_isready; do sleep 1; done
             CTID=$(docker-compose -f docker-compose.test.yaml ps -q db)
-            PORT=$(docker port $CTID|head -n 1|cut -f 2 -d ":")
+            PORT=$(docker port "$CTID"|head -n 1|cut -f 2 -d ":")
             echo "PostgreSQL exposed port: $PORT"
             SPRING_DATASOURCE_URL="jdbc:postgresql://localhost:$PORT/zipi" mvn clean test
             $DCT down -v
