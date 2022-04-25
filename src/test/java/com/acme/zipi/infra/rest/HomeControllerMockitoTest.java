@@ -20,7 +20,7 @@ public class HomeControllerMockitoTest {
         ResponseEntity<String> responseEntity = homeController.getUsers();
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals("Hello World!", responseEntity.getBody());
+        assertEquals("Hello World, v2.0!", responseEntity.getBody());
     }
     
 
