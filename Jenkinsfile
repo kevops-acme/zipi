@@ -7,11 +7,10 @@ cfg = jplConfig('zipi', 'backend' ,'', [email: 'pedro.rodriguez+kevops@kairosds.
 cfg.commitValidation.enabled = false
 
 pipeline {
-    agent none
+    agent { label 'docker' }
 
     stages {
         stage ('Initialize') {
-            agent { label 'docker' }
             steps  {
                 jplStart(cfg)
             }
@@ -24,13 +23,11 @@ pipeline {
 //            }
 //        }
         stage ("Compile") {
-            agent { label 'docker' }
             steps {
                 sh "bin/devcontrol.sh compile"
             }
         }
         stage ("Test") {
-            agent { label 'docker' }
             steps {
                 sh "devcontrol test"
             }
@@ -41,13 +38,11 @@ pipeline {
             }
         }
         stage ("Build jar") {
-            agent { label 'docker' }
             steps {
                 sh "bin/devcontrol.sh build-jar"
             }
         }
         stage ("Build docker image") {
-            agent { label 'docker' }
             when {
                 anyOf {
                     branch 'PR-*';
@@ -59,7 +54,6 @@ pipeline {
             }
         }
         stage ("Deploy") {
-            agent { label 'docker' }
             when { branch 'main' }
             steps {
                 sshagent (credentials: ['jpl-ssh-credentials']) {
