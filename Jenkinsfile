@@ -16,6 +16,30 @@ pipeline {
                 jplStart(cfg)
             }
         }
+        stage ('PR echo') {
+            agent { label 'docker' }
+            when {
+                anyOf {
+                    branch 'PR-*';
+                }
+            }
+            steps  {
+                echo "Hello from PR"
+            }
+        }
+        stage ('Branch echo') {
+            agent { label 'docker' }
+            when {
+                not {
+                    anyOf {
+                        branch 'PR-*';
+                    }
+                }
+            }
+            steps  {
+                echo "Hello from branch"
+            }
+        }
 //        stage('Sonar analysis') {
 //            agent { label 'docker' }
 //            when { branch 'develop' }
