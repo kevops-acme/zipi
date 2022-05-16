@@ -8,5 +8,6 @@ import lombok.Data;
 public class CreateUserResponse {
 
     String userId;
+    String link;
 
 }

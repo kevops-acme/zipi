@@ -17,7 +17,10 @@ public class CreateUserUseCase {
         User user = User.builder().userId(UUID.randomUUID().toString()).name(request.name).age(request.age).build();
         User createdUser = this.usersRepository.create(user);
 
-        CreateUserResponse createUserResponse = CreateUserResponse.builder().userId(createdUser.getUserId()).build();
+        CreateUserResponse createUserResponse = CreateUserResponse.builder()
+        .userId(createdUser.getUserId())
+        .link(String.format("http://localhost:8080/v1/users/%s", createdUser.getUserId()))
+        .build();
         return createUserResponse;
     }
 

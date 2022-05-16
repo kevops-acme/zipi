@@ -44,10 +44,7 @@ public class UsersController {
 
         CreateUserResponse createUserResponse = this.createUserUseCase.execute(createUserRequest);
 
-        CreateUserResponse createUserHttpResponse = CreateUserResponse
-                .builder().userId(createUserResponse.getUserId()).build();
-
-        return new ResponseEntity<CreateUserResponse>(createUserHttpResponse, HttpStatus.CREATED);
+        return new ResponseEntity<CreateUserResponse>(createUserResponse, HttpStatus.CREATED);
     }
 
     @GetMapping
