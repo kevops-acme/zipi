@@ -681,13 +681,13 @@
 	],
 	"variable": [
 		{
-			"id": "7cc80d7d-13f4-4004-ae93-010eb9518f0b",
+			"id": "fa2f76f7-62df-4237-94b0-ca0b3530268d",
 			"key": "baseUrl",
 			"value": "localhost:8080",
 			"type": "string"
 		},
 		{
-			"id": "1c50a7bf-ba38-4e5f-aa24-c3cadba5cd0c",
+			"id": "9d388554-a970-4c2d-88fe-8a9a1aaa124b",
 			"key": "userId",
 			"value": ""
 		}
