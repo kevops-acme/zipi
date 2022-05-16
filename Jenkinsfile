@@ -36,6 +36,7 @@ pipeline {
         stage ("Sonar Check") {
             when { branch 'PR-*' }
             steps {
+                // Reference: https://blog.jdriven.com/2019/08/sonarcloud-github-pull-request-analysis-from-jenkins/
                 withSonarQubeEnv ('SonarCloud') {
                     sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar \
                         -Dsonar.organization='kevops-acme' \
