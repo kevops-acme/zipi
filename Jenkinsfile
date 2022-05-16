@@ -15,13 +15,6 @@ pipeline {
                 jplStart(cfg)
             }
         }
-//        stage('Sonar analysis') {
-//            agent { label 'docker' }
-//            when { branch 'develop' }
-//            steps {
-//                jplSonarScanner(cfg)
-//            }
-//        }
         stage ("Compile") {
             steps {
                 sh "bin/devcontrol.sh compile"
@@ -29,11 +22,49 @@ pipeline {
         }
         stage ("Test") {
             steps {
-                sh "devcontrol test"
+                sh "bin/devcontrol.sh test"
             }
             post {
                 always {
                     sh "bin/devcontrol.sh destroy"
+                }
+            }
+        }
+        stage ("Sonar: Regular Branch Check") {
+            when { not { branch 'PR-*' } }
+            steps {
+                // Make analysis of the branch with SonarScanner and send it to SonarCloud
+                withSonarQubeEnv ('SonarCloud') {
+                    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar \
+                        -Dsonar.organization="kevops-acme" \
+                        -Dsonar.projectKey="kevops-acme_zipi" \
+                        -Dsonar.branch.name="$BRANCH_NAME"'
+                }
+            }
+        }
+        stage ("Sonar: PR Check") {
+            when { branch 'PR-*' }
+            steps {
+                // Make analysis of the PR with SonarScanner and send it to SonarCloud
+                // Reference: https://blog.jdriven.com/2019/08/sonarcloud-github-pull-request-analysis-from-jenkins/
+                withSonarQubeEnv ('SonarCloud') {
+                    sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar \
+                        -Dsonar.organization='kevops-acme' \
+                        -Dsonar.projectKey='kevops-acme_zipi' \
+                        -Dsonar.pullrequest.provider='GitHub' \
+                        -Dsonar.pullrequest.github.repository='kevops-acme/zipi' \
+                        -Dsonar.pullrequest.key='${env.CHANGE_ID}' \
+                        -Dsonar.pullrequest.branch='${env.CHANGE_BRANCH}'"
+                }
+            }
+        }
+        stage ("Sonar: Wait for QG") {
+            steps {
+                // Wait for QuaityGate webhook result
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }
