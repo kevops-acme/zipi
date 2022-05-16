@@ -33,9 +33,7 @@ pipeline {
         stage ("Sonar Check") {
             when { branch 'PR-*' }
             steps {
-                withSonarQubeEnv ('SonarCloud') {  // Optionally use a Maven environment you've configured already
-                    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.organization="kevops-acme" -Dsonar.projectKey="kevops-acme_zipi" -Dsonar.branch.name="$BRANCH_NAME"'
-                }
+                // Make analysis SonarScanner and send it to SonarCloud
                 // Reference: https://blog.jdriven.com/2019/08/sonarcloud-github-pull-request-analysis-from-jenkins/
                 withSonarQubeEnv ('SonarCloud') {
                     sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar \
@@ -46,17 +44,7 @@ pipeline {
                         -Dsonar.pullrequest.key='${env.CHANGE_ID}' \
                         -Dsonar.pullrequest.branch='${env.CHANGE_BRANCH}'"
                 }
-            }
-            post {
-                always {
-                    sh "bin/devcontrol.sh destroy"
-                }
-            }
-        }
-        stage ("Wait for Quality Gate") {
-            agent none
-
-            steps {
+                // Wait for QuaityGate webhook result
                 timeout(time: 1, unit: 'HOURS') {
                     // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
                     // true = set pipeline to UNSTABLE, false = don't
