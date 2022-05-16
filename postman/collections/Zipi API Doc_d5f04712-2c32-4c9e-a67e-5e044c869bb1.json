@@ -37,21 +37,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/v1/users/:userId",
+									"raw": "{{baseUrl}}/v1/users/{{userId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"v1",
 										"users",
-										":userId"
-									],
-									"variable": [
-										{
-											"key": "userId",
-											"value": "<string>",
-											"description": "(Required) "
-										}
+										"{{userId}}"
 									]
 								}
 							},
@@ -136,6 +129,20 @@
 						},
 						{
 							"name": "Update user by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e24535b7-aeef-48c2-9714-ca0c1d05e3f2",
+										"exec": [
+											"pm.test(\"Status code is 204\", function () {",
+											"    pm.response.to.have.status(204);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "48ffa009-a3e6-48e2-bee7-b5ed063e7d7b",
 							"request": {
 								"method": "PUT",
@@ -145,22 +152,24 @@
 										"value": "application/json"
 									}
 								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Luis\",\n    \"age\": 41\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "{{baseUrl}}/v1/users/:userId",
+									"raw": "{{baseUrl}}/v1/users/{{userId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"v1",
 										"users",
-										":userId"
-									],
-									"variable": [
-										{
-											"key": "userId",
-											"value": "<string>",
-											"description": "(Required) "
-										}
+										"{{userId}}"
 									]
 								}
 							},
@@ -245,6 +254,22 @@
 						},
 						{
 							"name": "Delete user by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "712497f9-8c16-4b65-b51f-e5b245e97c75",
+										"exec": [
+											"pm.test(\"Status code is 204\", function () {",
+											"    pm.response.to.have.status(204);",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "6931d447-e30d-44de-b24b-7248ff4f5249",
 							"request": {
 								"method": "DELETE",
@@ -255,21 +280,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/v1/users/:userId",
+									"raw": "{{baseUrl}}/v1/users/{{userId}}",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
 										"v1",
 										"users",
-										":userId"
-									],
-									"variable": [
-										{
-											"key": "userId",
-											"value": "<string>",
-											"description": "(Required) "
-										}
+										"{{userId}}"
 									]
 								}
 							},
@@ -357,6 +375,24 @@
 				},
 				{
 					"name": "Create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8ddc593f-afa0-43d3-ac33-6b30936a5c59",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"",
+									"pm.collectionVariables.set(\"userId\", response.userId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "95fed537-f7a2-46e2-a2e4-e6539942775a",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -375,7 +411,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"name\": \"<string>\",\n \"age\": 59992018.70283386,\n \"userId\": \"622ed031-1ca8-1e8b-267b-ba69a116dc52\"\n}",
+							"raw": "{\n \"name\": \"Ruben\",\n \"age\": 39\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -439,6 +475,20 @@
 				},
 				{
 					"name": "Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "93c01c3a-5faf-4bec-85d9-ad6998b04c84",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "9d59a59c-72fa-48e5-a044-8dbb7821f137",
 					"request": {
 						"method": "GET",
@@ -531,10 +581,15 @@
 	],
 	"variable": [
 		{
-			"id": "8bd986f8-ef59-48db-891b-5c2e4aaa38b9",
+			"id": "bcd2eefb-4609-4284-90c5-dc8c49001d71",
 			"key": "baseUrl",
 			"value": "localhost:8080",
 			"type": "string"
+		},
+		{
+			"id": "ac62e463-88ca-4f17-b91c-935465ee8457",
+			"key": "userId",
+			"value": ""
 		}
 	]
 }
