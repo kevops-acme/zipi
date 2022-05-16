@@ -33,6 +33,25 @@ pipeline {
                 }
             }
         }
+        stage ("Sonar Check") {
+            when { branch 'PR-*' }
+            steps {
+                withSonarQubeEnv ('SonarCloud') {
+                    sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar \
+                        -Dsonar.organization='kevops-acme' \
+                        -Dsonar.projectKey='kevops-acme_zipi' \
+                        -Dsonar.pullrequest.provider='GitHub' \
+                        -Dsonar.pullrequest.github.repository='kevops-acme/zipi' \
+                        -Dsonar.pullrequest.key='${env.CHANGE_ID}' \
+                        -Dsonar.pullrequest.branch='${env.CHANGE_BRANCH}'"
+                }
+            }
+            post {
+                always {
+                    sh "bin/devcontrol.sh destroy"
+                }
+            }
+        }
         stage ("Wait for Quality Gate") {
             agent none
 
