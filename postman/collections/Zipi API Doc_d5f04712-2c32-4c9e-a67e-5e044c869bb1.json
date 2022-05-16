@@ -21,6 +21,38 @@
 										"exec": [
 											"pm.test(\"Status code is 200\", function () {",
 											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"const deleteUserRequest = {",
+											"    url: `http://localhost:8080/v1/users/${pm.collectionVariables.get(\"userId\")}`,",
+											"    method: 'DELETE',",
+											"    header: { 'content-type': 'application/json' }",
+											"}",
+											"",
+											"pm.sendRequest(deleteUserRequest, function (err, response) {",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a7765386-d387-43fa-a576-c8644c210ea3",
+										"exec": [
+											"const createUserRequest = {",
+											"    url: 'http://localhost:8080/v1/users',",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({\"name\": \"Ruben\", \"age\": 39})",
+											"    }",
+											"}",
+											"",
+											"pm.sendRequest(createUserRequest, function (err, response) {",
+											"    const userId = response.json().userId;",
+											"    pm.collectionVariables.set(\"userId\", userId);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -137,6 +169,29 @@
 										"exec": [
 											"pm.test(\"Status code is 204\", function () {",
 											"    pm.response.to.have.status(204);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "e1d19823-003f-4997-b84c-6d967b1054da",
+										"exec": [
+											"const createUserRequest = {",
+											"    url: 'http://localhost:8080/v1/users',",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({\"name\": \"Ruben\", \"age\": 39})",
+											"    }",
+											"}",
+											"",
+											"pm.sendRequest(createUserRequest, function (err, response) {",
+											"    const userId = response.json().userId;",
+											"    pm.collectionVariables.set(\"userId\", userId);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -268,6 +323,29 @@
 										],
 										"type": "text/javascript"
 									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "265dabbb-6674-4ceb-9da3-c12258365df7",
+										"exec": [
+											"const createUserRequest = {",
+											"    url: 'http://localhost:8080/v1/users',",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({\"name\": \"Ruben\", \"age\": 39})",
+											"    }",
+											"}",
+											"",
+											"pm.sendRequest(createUserRequest, function (err, response) {",
+											"    const userId = response.json().userId;",
+											"    pm.collectionVariables.set(\"userId\", userId);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
 								}
 							],
 							"id": "6931d447-e30d-44de-b24b-7248ff4f5249",
@@ -371,7 +449,29 @@
 							]
 						}
 					],
-					"id": "bac28f7f-b688-4e02-bd42-11ee4adacc0a"
+					"id": "bac28f7f-b688-4e02-bd42-11ee4adacc0a",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9e112959-8b7d-41c9-976c-9a1ea9cd1fa7",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "47d66942-5694-4b14-9130-a8b7a521e87a",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
 				},
 				{
 					"name": "Create user",
@@ -581,13 +681,13 @@
 	],
 	"variable": [
 		{
-			"id": "bcd2eefb-4609-4284-90c5-dc8c49001d71",
+			"id": "7cc80d7d-13f4-4004-ae93-010eb9518f0b",
 			"key": "baseUrl",
 			"value": "localhost:8080",
 			"type": "string"
 		},
 		{
-			"id": "ac62e463-88ca-4f17-b91c-935465ee8457",
+			"id": "1c50a7bf-ba38-4e5f-aa24-c3cadba5cd0c",
 			"key": "userId",
 			"value": ""
 		}
