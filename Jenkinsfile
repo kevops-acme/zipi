@@ -23,7 +23,7 @@ pipeline {
         stage ("Test") {
             steps {
                 sh "bin/devcontrol.sh test"
-                withSonarQubeEnv () {
+                withSonarQubeEnv ('SonarCloud') {
                     sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar"
                 }
             }
