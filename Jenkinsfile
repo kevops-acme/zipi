@@ -15,13 +15,6 @@ pipeline {
                 jplStart(cfg)
             }
         }
-//        stage('Sonar analysis') {
-//            agent { label 'docker' }
-//            when { branch 'develop' }
-//            steps {
-//                jplSonarScanner(cfg)
-//            }
-//        }
         stage ("Compile") {
             steps {
                 sh "bin/devcontrol.sh compile"
@@ -29,11 +22,24 @@ pipeline {
         }
         stage ("Test") {
             steps {
-                sh "devcontrol test"
+                sh "bin/devcontrol.sh test"
+                withSonarQubeEnv () {
+                    sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar"
+                }
             }
             post {
                 always {
                     sh "bin/devcontrol.sh destroy"
+                }
+            }
+        }
+        stage ("Wait for Quality Gate") {
+            agent none
+
+            timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
+                def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+                if (qg.status != 'OK') {
+                    error "Pipeline aborted due to quality gate failure: ${qg.status}"
                 }
             }
         }
