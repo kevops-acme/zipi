@@ -5,8 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class CreateUserHttpResponse {
+public class UserDTO {
 
-    String userId;
+    String name;
+    Integer age;
 
 }

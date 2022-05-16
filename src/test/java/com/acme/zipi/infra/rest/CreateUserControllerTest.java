@@ -38,7 +38,7 @@ public class CreateUserControllerTest {
         User userCreated = User.builder().userId(userId).name(name).age(age).build();
         Mockito.when(usersRepository.create(any())).thenReturn(userCreated);
 
-        CreateUserHttpRequest createUserHttpRequest = CreateUserHttpRequest.builder()
+        UserDTO createUserHttpRequest = UserDTO.builder()
                 .name(name)
                 .age(age)
                 .build();
