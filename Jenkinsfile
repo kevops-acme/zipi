@@ -24,7 +24,7 @@ pipeline {
             steps {
                 sh "bin/devcontrol.sh test"
                 withSonarQubeEnv ('SonarCloud') {  // Optionally use a Maven environment you've configured already
-                    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.organization="kevops-acme" -Dsonar.projectKey="kevops-acme_zipi"'
+                    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.organization="kevops-acme" -Dsonar.projectKey="kevops-acme_zipi" -Dsonar.branch.name="$BRANCH_NAME"'
                 }
             }
             post {
