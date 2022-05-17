@@ -1,7 +1,5 @@
 package com.acme.zipi.application.users.delete;
 
-import javax.persistence.EntityNotFoundException;
-
 import com.acme.zipi.domain.exceptions.UserNotFoundException;
 import com.acme.zipi.domain.repositories.UsersRepository;
 
