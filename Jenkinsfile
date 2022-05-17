@@ -22,7 +22,11 @@ pipeline {
         }
         stage ("Test") {
             steps {
-                sh "bin/devcontrol.sh test"
+                sh """
+                sed -i "s/5432:5432/5432/g" docker-compose.test.yaml
+                bin/devcontrol.sh test
+                git checkout docker-compose.test.yaml
+                """
             }
             post {
                 always {
