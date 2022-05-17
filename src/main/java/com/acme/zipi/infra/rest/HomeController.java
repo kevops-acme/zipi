@@ -10,7 +10,7 @@ public class HomeController {
 
     @GetMapping("")
     ResponseEntity<String> getUsers() {
-        return new ResponseEntity<String>("Hello World, v2.0!", HttpStatus.OK);
+        return new ResponseEntity<>("Hello World, v2.0!", HttpStatus.OK);
     }
 
 }
