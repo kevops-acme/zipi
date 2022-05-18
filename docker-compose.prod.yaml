@@ -27,6 +27,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:${POSTGRES_PORT}/${POSTGRES_DB}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      APP_BASEURL_ZAPE: http://zape.app.kevops.academy:3000
+      APP_BASEURL_ZIPI: http://zipi.app.kevops.academy:8080
     restart: unless-stopped
     depends_on:
       db:

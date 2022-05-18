@@ -3,6 +3,8 @@ package com.acme.zipi.application.users.create;
 import com.acme.zipi.domain.model.User;
 import com.acme.zipi.domain.repositories.UsersRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -10,6 +12,9 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class CreateUserUseCase {
+
+    @Value("${app.baseurl.zipi}")
+    String baseUrlZipi;
 
     private final UsersRepository usersRepository;
 
@@ -19,7 +24,7 @@ public class CreateUserUseCase {
 
         CreateUserResponse createUserResponse = CreateUserResponse.builder()
         .userId(createdUser.getUserId())
-        .link(String.format("http://localhost:8080/v1/users/%s", createdUser.getUserId()))
+        .link(String.format("%s/v1/users/%s", this.baseUrlZipi, createdUser.getUserId()))
         .build();
         return createUserResponse;
     }
