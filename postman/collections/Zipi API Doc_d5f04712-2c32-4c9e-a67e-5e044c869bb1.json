@@ -184,19 +184,18 @@
 									"listen": "test",
 									"script": {
 										"id": "e24535b7-aeef-48c2-9714-ca0c1d05e3f2",
-										"type": "text/javascript",
 										"exec": [
 											"pm.test(\"Status code is 204\", function () {",
 											"    pm.response.to.have.status(204);",
 											"});"
-										]
+										],
+										"type": "text/javascript"
 									}
 								},
 								{
 									"listen": "prerequest",
 									"script": {
 										"id": "e1d19823-003f-4997-b84c-6d967b1054da",
-										"type": "text/javascript",
 										"exec": [
 											"const createUserRequest = {",
 											"    url: `${pm.environment.get('baseUrl')}/v1/users`,",
@@ -212,7 +211,8 @@
 											"    const userId = response.json().userId;",
 											"    pm.collectionVariables.set(\"userId\", userId);",
 											"});"
-										]
+										],
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -225,6 +225,15 @@
 										"value": "application/json"
 									}
 								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n \"name\": \"Ruben\",\n \"age\": 39\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{baseUrl}}/v1/users/{{userId}}",
 									"host": [
@@ -237,11 +246,11 @@
 									],
 									"variable": [
 										{
+											"id": "249bf5b5-e966-409e-aa8b-1536d1fa2b0d",
 											"key": "userId",
 											"value": "ipsum",
-											"description": "(Required) ",
-											"id": "249bf5b5-e966-409e-aa8b-1536d1fa2b0d",
-											"type": "string"
+											"type": "string",
+											"description": "(Required) "
 										}
 									]
 								}
@@ -730,7 +739,6 @@
 					"listen": "prerequest",
 					"script": {
 						"id": "f6c041a8-deda-4dd0-a7cd-41bfa27e56fb",
-						"type": "text/javascript",
 						"exec": [
 							"const createUserRequest = {",
 							"    url: `${pm.environment.get('baseUrl')}/v1/users`,",
@@ -746,14 +754,14 @@
 							"    const userId = response.json().userId;",
 							"    pm.collectionVariables.set(\"userId\", userId);",
 							"});"
-						]
+						],
+						"type": "text/javascript"
 					}
 				},
 				{
 					"listen": "test",
 					"script": {
 						"id": "4573892a-8264-4c02-89d5-9c3c74267719",
-						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {",
 							"    pm.response.to.have.status(201);",
@@ -767,7 +775,8 @@
 							"",
 							"pm.sendRequest(deleteUserRequest, function (err, response) {",
 							"});"
-						]
+						],
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -787,6 +796,15 @@
 						"value": "application/json"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"Home\",\n    \"amount\": \"1000€\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{baseUrl}}/v1/users/{{userId}}/insurances/create",
 					"host": [
@@ -896,14 +914,14 @@
 	],
 	"variable": [
 		{
-			"id": "c65687bc-1f52-462f-8e9a-25baa9c5db15",
+			"id": "a4d4d7a2-eca0-4ffd-9544-e02f5d03020b",
 			"key": "baseUrl",
 			"value": "localhost:8080",
 			"type": "string",
 			"disabled": true
 		},
 		{
-			"id": "46c83bd6-0c38-4fc0-ac03-04c3bf5995cd",
+			"id": "2d183a47-bd5f-429f-9dd5-14f4886c6bac",
 			"key": "userId",
 			"value": "",
 			"type": "any"
