@@ -1,5 +1,8 @@
 package com.acme.zipi.infra.rest;
 
+import com.acme.zipi.application.insurances.create.CreateInsuranceRequest;
+import com.acme.zipi.application.insurances.create.CreateInsuranceResponse;
+import com.acme.zipi.application.insurances.create.CreateInsuranceUseCase;
 import com.acme.zipi.application.users.create.CreateUserRequest;
 import com.acme.zipi.application.users.create.CreateUserResponse;
 import com.acme.zipi.application.users.create.CreateUserUseCase;
@@ -35,6 +38,7 @@ public class UsersController {
     private final GetUserByIdUseCase byIdUseCase;
     private final DeleteUserUseCase deleteUserUseCase;
     private final UpdateUserUseCase updateUserUseCase;
+    private final CreateInsuranceUseCase createInsuranceUseCase;
 
     @PostMapping
     public ResponseEntity<CreateUserResponse> createUser(@RequestBody UserDTO userDTO) {
@@ -72,5 +76,16 @@ public class UsersController {
         User user = User.builder().userId(userId).name(userDTO.name).age(userDTO.age).build();
         this.updateUserUseCase.execute(userId, user);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{userId}/insurances/create")
+    public ResponseEntity<CreateInsuranceResponse> createInsuranceByUserId(@PathVariable String userId, @RequestBody CreateInsuranceDTO createInsuranceDTO) {
+        
+        CreateInsuranceRequest request = CreateInsuranceRequest.builder()
+        .amount(createInsuranceDTO.amount).type(createInsuranceDTO.type)
+        .userId(userId)
+        .build();
+        CreateInsuranceResponse response = this.createInsuranceUseCase.execute(request);
+        return new ResponseEntity<CreateInsuranceResponse>(response, HttpStatus.CREATED);
     }
 }
