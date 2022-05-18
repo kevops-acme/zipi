@@ -18,30 +18,31 @@
 									"listen": "test",
 									"script": {
 										"id": "5057a288-ba08-479c-92f1-6966db360728",
+										"type": "text/javascript",
 										"exec": [
 											"pm.test(\"Status code is 200\", function () {",
 											"    pm.response.to.have.status(200);",
 											"});",
 											"",
 											"const deleteUserRequest = {",
-											"    url: `http://localhost:8080/v1/users/${pm.collectionVariables.get(\"userId\")}`,",
+											"    url: `${pm.environment.get('baseUrl')}/v1/users/${pm.collectionVariables.get(\"userId\")}`,",
 											"    method: 'DELETE',",
 											"    header: { 'content-type': 'application/json' }",
 											"}",
 											"",
 											"pm.sendRequest(deleteUserRequest, function (err, response) {",
 											"});"
-										],
-										"type": "text/javascript"
+										]
 									}
 								},
 								{
 									"listen": "prerequest",
 									"script": {
 										"id": "a7765386-d387-43fa-a576-c8644c210ea3",
+										"type": "text/javascript",
 										"exec": [
 											"const createUserRequest = {",
-											"    url: 'http://localhost:8080/v1/users',",
+											"    url: `${pm.environment.get('baseUrl')}/v1/users`,",
 											"    method: 'POST',",
 											"    header: { 'content-type': 'application/json' },",
 											"    body: {",
@@ -54,8 +55,7 @@
 											"    const userId = response.json().userId;",
 											"    pm.collectionVariables.set(\"userId\", userId);",
 											"});"
-										],
-										"type": "text/javascript"
+										]
 									}
 								}
 							],
@@ -77,6 +77,15 @@
 										"v1",
 										"users",
 										"{{userId}}"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "ipsum",
+											"description": "(Required) ",
+											"id": "4ee75820-0afe-44ae-b649-b3c5d73b060d",
+											"type": "string"
+										}
 									]
 								}
 							},
@@ -157,6 +166,15 @@
 									"responseTime": null,
 									"body": "{\n \"code\": \"urn:uuid:7c053551-8d60-0414-d83b-d4c99f6585de\",\n \"message\": \"<string>\",\n \"status\": -42131291\n}"
 								}
+							],
+							"variable": [
+								{
+									"id": "4ee75820-0afe-44ae-b649-b3c5d73b060d",
+									"key": "userId",
+									"value": "ipsum",
+									"type": "string",
+									"description": "(Required) "
+								}
 							]
 						},
 						{
@@ -166,21 +184,22 @@
 									"listen": "test",
 									"script": {
 										"id": "e24535b7-aeef-48c2-9714-ca0c1d05e3f2",
+										"type": "text/javascript",
 										"exec": [
 											"pm.test(\"Status code is 204\", function () {",
 											"    pm.response.to.have.status(204);",
 											"});"
-										],
-										"type": "text/javascript"
+										]
 									}
 								},
 								{
 									"listen": "prerequest",
 									"script": {
 										"id": "e1d19823-003f-4997-b84c-6d967b1054da",
+										"type": "text/javascript",
 										"exec": [
 											"const createUserRequest = {",
-											"    url: 'http://localhost:8080/v1/users',",
+											"    url: `${pm.environment.get('baseUrl')}/v1/users`,",
 											"    method: 'POST',",
 											"    header: { 'content-type': 'application/json' },",
 											"    body: {",
@@ -193,8 +212,7 @@
 											"    const userId = response.json().userId;",
 											"    pm.collectionVariables.set(\"userId\", userId);",
 											"});"
-										],
-										"type": "text/javascript"
+										]
 									}
 								}
 							],
@@ -207,15 +225,6 @@
 										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"Luis\",\n    \"age\": 41\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "{{baseUrl}}/v1/users/{{userId}}",
 									"host": [
@@ -225,6 +234,15 @@
 										"v1",
 										"users",
 										"{{userId}}"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "ipsum",
+											"description": "(Required) ",
+											"id": "249bf5b5-e966-409e-aa8b-1536d1fa2b0d",
+											"type": "string"
+										}
 									]
 								}
 							},
@@ -305,6 +323,15 @@
 									"responseTime": null,
 									"body": "{\n \"code\": \"urn:uuid:7c053551-8d60-0414-d83b-d4c99f6585de\",\n \"message\": \"<string>\",\n \"status\": -42131291\n}"
 								}
+							],
+							"variable": [
+								{
+									"id": "249bf5b5-e966-409e-aa8b-1536d1fa2b0d",
+									"key": "userId",
+									"value": "ipsum",
+									"type": "string",
+									"description": "(Required) "
+								}
 							]
 						},
 						{
@@ -314,23 +341,24 @@
 									"listen": "test",
 									"script": {
 										"id": "712497f9-8c16-4b65-b51f-e5b245e97c75",
+										"type": "text/javascript",
 										"exec": [
 											"pm.test(\"Status code is 204\", function () {",
 											"    pm.response.to.have.status(204);",
 											"});",
 											"",
 											""
-										],
-										"type": "text/javascript"
+										]
 									}
 								},
 								{
 									"listen": "prerequest",
 									"script": {
 										"id": "265dabbb-6674-4ceb-9da3-c12258365df7",
+										"type": "text/javascript",
 										"exec": [
 											"const createUserRequest = {",
-											"    url: 'http://localhost:8080/v1/users',",
+											"    url: `${pm.environment.get('baseUrl')}/v1/users`,",
 											"    method: 'POST',",
 											"    header: { 'content-type': 'application/json' },",
 											"    body: {",
@@ -343,8 +371,7 @@
 											"    const userId = response.json().userId;",
 											"    pm.collectionVariables.set(\"userId\", userId);",
 											"});"
-										],
-										"type": "text/javascript"
+										]
 									}
 								}
 							],
@@ -366,6 +393,15 @@
 										"v1",
 										"users",
 										"{{userId}}"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "ipsum",
+											"description": "(Required) ",
+											"id": "42a33ab5-df55-427b-ba7b-5d3ca2feef08",
+											"type": "string"
+										}
 									]
 								}
 							},
@@ -446,6 +482,15 @@
 									"responseTime": null,
 									"body": "{\n \"code\": \"urn:uuid:7c053551-8d60-0414-d83b-d4c99f6585de\",\n \"message\": \"<string>\",\n \"status\": -42131291\n}"
 								}
+							],
+							"variable": [
+								{
+									"id": "42a33ab5-df55-427b-ba7b-5d3ca2feef08",
+									"key": "userId",
+									"value": "ipsum",
+									"type": "string",
+									"description": "(Required) "
+								}
 							]
 						}
 					],
@@ -480,6 +525,7 @@
 							"listen": "test",
 							"script": {
 								"id": "8ddc593f-afa0-43d3-ac33-6b30936a5c59",
+								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Status code is 201\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -488,8 +534,7 @@
 									"const response = pm.response.json();",
 									"",
 									"pm.collectionVariables.set(\"userId\", response.userId);"
-								],
-								"type": "text/javascript"
+								]
 							}
 						}
 					],
@@ -580,12 +625,12 @@
 							"listen": "test",
 							"script": {
 								"id": "93c01c3a-5faf-4bec-85d9-ad6998b04c84",
+								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});"
-								],
-								"type": "text/javascript"
+								]
 							}
 						}
 					],
@@ -677,19 +722,191 @@
 				}
 			],
 			"id": "bace1d39-f223-476d-8a42-46217d69659a"
+		},
+		{
+			"name": "Create insurance to user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f6c041a8-deda-4dd0-a7cd-41bfa27e56fb",
+						"type": "text/javascript",
+						"exec": [
+							"const createUserRequest = {",
+							"    url: `${pm.environment.get('baseUrl')}/v1/users`,",
+							"    method: 'POST',",
+							"    header: { 'content-type': 'application/json' },",
+							"    body: {",
+							"        mode: 'raw',",
+							"        raw: JSON.stringify({\"name\": \"Ruben\", \"age\": 39})",
+							"    }",
+							"}",
+							"",
+							"pm.sendRequest(createUserRequest, function (err, response) {",
+							"    const userId = response.json().userId;",
+							"    pm.collectionVariables.set(\"userId\", userId);",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "4573892a-8264-4c02-89d5-9c3c74267719",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"const deleteUserRequest = {",
+							"    url: `${pm.environment.get('baseUrl')}/v1/users/${pm.collectionVariables.get(\"userId\")}`,",
+							"    method: 'DELETE',",
+							"    header: { 'content-type': 'application/json' }",
+							"}",
+							"",
+							"pm.sendRequest(deleteUserRequest, function (err, response) {",
+							"});"
+						]
+					}
+				}
+			],
+			"id": "347f584b-a05f-4e34-8c3a-1fb11e59e7a3",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/v1/users/{{userId}}/insurances/create",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"users",
+						"{{userId}}",
+						"insurances",
+						"create"
+					],
+					"variable": [
+						{
+							"id": "1a9e5cc5-5bc2-422c-bfe4-7ba9c82d6ece",
+							"key": "userId",
+							"value": "magna anim pariatur",
+							"type": "string",
+							"description": "(Required) "
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "131b69a5-4a58-4095-9653-2484830d00c6",
+					"name": "Create insurance to user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"velit\",\n  \"amount\": \"adipisicing pariatur\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/users/:userId/insurances/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"users",
+								":userId",
+								"insurances",
+								"create"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "et do non",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": "{\n  \"insuranceId\": \"ex nulla\"\n}"
+				}
+			],
+			"variable": [
+				{
+					"id": "1a9e5cc5-5bc2-422c-bfe4-7ba9c82d6ece",
+					"key": "userId",
+					"value": "magna anim pariatur",
+					"type": "string",
+					"description": "(Required) "
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2e05abd5-3134-4e0b-b866-cbdd4673d27c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "9d904b14-4af0-416b-bbd2-acd9caa9b16b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
 		{
-			"id": "fa2f76f7-62df-4237-94b0-ca0b3530268d",
+			"id": "c65687bc-1f52-462f-8e9a-25baa9c5db15",
 			"key": "baseUrl",
 			"value": "localhost:8080",
-			"type": "string"
+			"type": "string",
+			"disabled": true
 		},
 		{
-			"id": "9d388554-a970-4c2d-88fe-8a9a1aaa124b",
+			"id": "46c83bd6-0c38-4fc0-ac03-04c3bf5995cd",
 			"key": "userId",
-			"value": ""
+			"value": "",
+			"type": "any"
 		}
 	]
 }

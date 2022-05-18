@@ -1,116 +1,150 @@
 openapi: 3.0.0
 
 info:
-  version: '1.0.0'
-  title: 'acme'
+  version: "1.0.0"
+  title: "acme"
   license:
     name: MIT
 
 servers:
-  - url: 'localhost:8080'
+  - url: "localhost:8080"
 
 paths:
   /v1/users/{userId}:
     get:
-      summary: 'Get user by id'
-      operationId: 'getUserById'
+      summary: "Get user by id"
+      operationId: "getUserById"
       parameters:
-          - name: userId
-            in: path
-            required: true
-            schema:
-                type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
-        '200':
-          description: 'Get user by id'
+        "200":
+          description: "Get user by id"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-        '404':
-           description: 'User not found'
-           content:
-             application/json:
-               schema:
-                 $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/User"
+        "404":
+          description: "User not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
     put:
-      summary: 'Update user by id'
-      operationId: 'updateUser'
+      summary: "Update user by id"
+      operationId: "updateUser"
       parameters:
-          - name: userId
-            in: path
-            required: true
-            schema:
-                type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
-        '204':
-          description: 'Update user by id'
-        '404':
-           description: 'User not found'
-           content:
-             application/json:
-               schema:
-                 $ref: '#/components/schemas/Error'
+        "204":
+          description: "Update user by id"
+        "404":
+          description: "User not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
     delete:
-      summary: 'Delete user by id'
-      operationId: 'deleteUser'
+      summary: "Delete user by id"
+      operationId: "deleteUser"
       parameters:
-          - name: userId
-            in: path
-            required: true
-            schema:
-                type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
-        '204':
-          description: 'Delete user by id'
-        '404':
-           description: 'User not found'
-           content:
-             application/json:
-               schema:
-                 $ref: '#/components/schemas/Error'
-    
+        "204":
+          description: "Delete user by id"
+        "404":
+          description: "User not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /v1/users/:
     post:
-      summary: 'Create user'
+      summary: "Create user"
       operationId: createUser
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
               example:
-                name: 'Ruben'
+                name: "Ruben"
                 age: 39
       responses:
-        '201':
-          description: 'Create user'
+        "201":
+          description: "Create user"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserId'
-                example: 
-                  userId: 'c3afc6b5-6d12-4635-b4cf-bd2913db1d45'
-  
+                $ref: "#/components/schemas/UserId"
+                example:
+                  userId: "c3afc6b5-6d12-4635-b4cf-bd2913db1d45"
+
     get:
-      summary: 'Get all users'
+      summary: "Get all users"
       operationId: getUsers
       responses:
-        '200':
-          description: 'Get all users'
+        "200":
+          description: "Get all users"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Users'
+                $ref: "#/components/schemas/Users"
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
+  /v1/users/{userId}/insurances/create:
+    post:
+      summary: "Create insurance to user"
+      operationId: createInsuranceByUserId
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateInsuranceRequest"
+      responses:
+        "201":
+          description: "Create insurance to user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateInsuranceResponse"
 
 components:
   schemas:
+    CreateInsuranceResponse:
+      type: object
+      properties:
+        insuranceId:
+          type: string
+    CreateInsuranceRequest:
+      type: object
+      properties:
+        type:
+          type: string
+        amount:
+          type: string
     UserId:
       type: object
       properties:
@@ -121,8 +155,8 @@ components:
       properties:
         users:
           type: array
-          items: 
-              $ref: '#/components/schemas/User'
+          items:
+            $ref: "#/components/schemas/User"
     User:
       type: object
       required:
