@@ -18,7 +18,6 @@
 									"listen": "test",
 									"script": {
 										"id": "5057a288-ba08-479c-92f1-6966db360728",
-										"type": "text/javascript",
 										"exec": [
 											"pm.test(\"Status code is 200\", function () {",
 											"    pm.response.to.have.status(200);",
@@ -32,14 +31,14 @@
 											"",
 											"pm.sendRequest(deleteUserRequest, function (err, response) {",
 											"});"
-										]
+										],
+										"type": "text/javascript"
 									}
 								},
 								{
 									"listen": "prerequest",
 									"script": {
 										"id": "a7765386-d387-43fa-a576-c8644c210ea3",
-										"type": "text/javascript",
 										"exec": [
 											"const createUserRequest = {",
 											"    url: `${pm.environment.get('baseUrl')}/v1/users`,",
@@ -55,7 +54,8 @@
 											"    const userId = response.json().userId;",
 											"    pm.collectionVariables.set(\"userId\", userId);",
 											"});"
-										]
+										],
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -82,9 +82,9 @@
 										{
 											"key": "userId",
 											"value": "ipsum",
+											"type": "string",
 											"description": "(Required) ",
-											"id": "4ee75820-0afe-44ae-b649-b3c5d73b060d",
-											"type": "string"
+											"id": "4ee75820-0afe-44ae-b649-b3c5d73b060d"
 										}
 									]
 								}
@@ -227,7 +227,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n \"name\": \"Ruben\",\n \"age\": 39\n}",
+									"raw": "{\n \"name\": \"Luis\",\n \"age\": 41\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -350,21 +350,20 @@
 									"listen": "test",
 									"script": {
 										"id": "712497f9-8c16-4b65-b51f-e5b245e97c75",
-										"type": "text/javascript",
 										"exec": [
 											"pm.test(\"Status code is 204\", function () {",
 											"    pm.response.to.have.status(204);",
 											"});",
 											"",
 											""
-										]
+										],
+										"type": "text/javascript"
 									}
 								},
 								{
 									"listen": "prerequest",
 									"script": {
 										"id": "265dabbb-6674-4ceb-9da3-c12258365df7",
-										"type": "text/javascript",
 										"exec": [
 											"const createUserRequest = {",
 											"    url: `${pm.environment.get('baseUrl')}/v1/users`,",
@@ -380,7 +379,8 @@
 											"    const userId = response.json().userId;",
 											"    pm.collectionVariables.set(\"userId\", userId);",
 											"});"
-										]
+										],
+										"type": "text/javascript"
 									}
 								}
 							],
@@ -405,11 +405,11 @@
 									],
 									"variable": [
 										{
+											"id": "42a33ab5-df55-427b-ba7b-5d3ca2feef08",
 											"key": "userId",
 											"value": "ipsum",
-											"description": "(Required) ",
-											"id": "42a33ab5-df55-427b-ba7b-5d3ca2feef08",
-											"type": "string"
+											"type": "string",
+											"description": "(Required) "
 										}
 									]
 								}
@@ -534,7 +534,6 @@
 							"listen": "test",
 							"script": {
 								"id": "8ddc593f-afa0-43d3-ac33-6b30936a5c59",
-								"type": "text/javascript",
 								"exec": [
 									"pm.test(\"Status code is 201\", function () {",
 									"    pm.response.to.have.status(201);",
@@ -543,7 +542,8 @@
 									"const response = pm.response.json();",
 									"",
 									"pm.collectionVariables.set(\"userId\", response.userId);"
-								]
+								],
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -894,7 +894,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "2e05abd5-3134-4e0b-b866-cbdd4673d27c",
+				"id": "7d8f0128-b948-45dc-a789-ab1ab5f5c7bb",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -904,7 +904,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "9d904b14-4af0-416b-bbd2-acd9caa9b16b",
+				"id": "cb513a18-171d-4316-95ed-f7dc76be7a3e",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -914,14 +914,7 @@
 	],
 	"variable": [
 		{
-			"id": "a4d4d7a2-eca0-4ffd-9544-e02f5d03020b",
-			"key": "baseUrl",
-			"value": "localhost:8080",
-			"type": "string",
-			"disabled": true
-		},
-		{
-			"id": "2d183a47-bd5f-429f-9dd5-14f4886c6bac",
+			"id": "7bb87365-41d2-46c1-bae8-4bd331d92d3d",
 			"key": "userId",
 			"value": "",
 			"type": "any"
