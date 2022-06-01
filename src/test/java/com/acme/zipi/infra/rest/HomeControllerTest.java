@@ -20,7 +20,7 @@ public class HomeControllerTest {
     public void testHomeController() throws Exception {
         MvcResult mvcResult = mockMvc.perform(get("/")).andExpect(status().isOk()).andReturn();
 
-        assertEquals("Hello World, v3.0!", mvcResult.getResponse().getContentAsString());
+        assertEquals("Hello World, v4.0!", mvcResult.getResponse().getContentAsString());
     }
 
 }
